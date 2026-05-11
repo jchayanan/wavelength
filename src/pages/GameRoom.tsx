@@ -234,6 +234,7 @@ export default function GameRoom() {
                   ? "กำลังเล่น"
                   : "เฉลยแล้ว"}
           </div>
+          <span className="room-code text-base">{room.code}</span>
         </div>
       </header>
 
@@ -243,8 +244,7 @@ export default function GameRoom() {
           {!isGameOver ? (
             <div className="text-center mb-2 flex items-center justify-center gap-3">
               <span className="text-xs text-text-muted uppercase tracking-wider">
-                รอบที่ {Math.min(room.current_turn || 1, totalTurns)} /{" "}
-                {totalTurns}
+                รอบที่ {Math.min(Math.ceil((room.current_turn || 1) / 2), room?.max_rounds || 5)} / {room?.max_rounds || 5}
               </span>
               {isPlaying && (
                 <span

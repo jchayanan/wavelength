@@ -157,7 +157,7 @@ export default function Home() {
         {/* Create Room */}
         <div className="glass-card p-5 flex flex-col gap-4 animate-fade-in-up animate-delay-100">
           <div className="flex flex-col gap-2">
-            <label className="text-sm text-text-secondary font-medium text-center">จำนวนรอบต่อคน</label>
+            <label className="text-sm text-text-secondary font-medium text-center">จำนวนรอบ</label>
             <div className="flex gap-2">
               {[3, 5, 10].map(n => (
                 <button
