@@ -176,50 +176,31 @@ export default function GameRoom() {
   return (
     <div className="bg-mesh min-h-dvh flex flex-col">
       {/* Header */}
-      <header className="px-4 pt-4 pb-2 flex items-center justify-between animate-fade-in-up">
-        <button
-          onClick={() => navigate("/")}
-          className="text-text-muted hover:text-text-primary transition-colors p-2 -ml-2"
-          id="back-button"
-        >
-          <svg
-            width="24"
-            height="24"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            strokeWidth="2"
-            strokeLinecap="round"
-            strokeLinejoin="round"
+      <header className="px-4 pt-4 pb-2 grid grid-cols-2 md:grid-cols-[auto_1fr_auto] gap-y-3 items-center animate-fade-in-up">
+        {/* Back Button */}
+        <div className="flex items-center justify-start">
+          <button
+            onClick={() => navigate("/")}
+            className="text-text-muted hover:text-text-primary transition-colors p-2 -ml-2"
+            id="back-button"
           >
-            <path d="M19 12H5M12 19l-7-7 7-7" />
-          </svg>
-        </button>
-
-        {/* Scoreboard */}
-        <div className="flex-1 flex justify-center px-4">
-          <div className="flex items-center gap-2 bg-white/5 rounded-full px-4 py-1.5 border border-white/10 shadow-lg">
-            <div className="flex flex-col items-end">
-              <span className="text-[10px] text-text-muted uppercase tracking-wider max-w-[80px] truncate">
-                {room.host_nickname || "Host"}
-              </span>
-              <span className="text-sm font-bold text-accent-purple">
-                {room.host_score || 0}
-              </span>
-            </div>
-            <div className="w-px h-6 bg-border-subtle mx-1" />
-            <div className="flex flex-col items-start">
-              <span className="text-[10px] text-text-muted uppercase tracking-wider max-w-[80px] truncate">
-                {room.guest_nickname || "Guest"}
-              </span>
-              <span className="text-sm font-bold text-accent-cyan">
-                {room.guest_score || 0}
-              </span>
-            </div>
-          </div>
+            <svg
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            >
+              <path d="M19 12H5M12 19l-7-7 7-7" />
+            </svg>
+          </button>
         </div>
 
-        <div className="flex items-center gap-3">
+        {/* Room Info */}
+        <div className="flex items-center justify-end gap-2 sm:gap-3 md:col-start-3">
           <div
             className={`status-chip ${isGameOver ? "finished" : room.status}`}
           >
@@ -234,7 +215,32 @@ export default function GameRoom() {
                   ? "กำลังเล่น"
                   : "เฉลยแล้ว"}
           </div>
-          <span className="room-code text-base">{room.code}</span>
+          <span className="room-code text-base sm:text-lg shrink-0">
+            {room.code}
+          </span>
+        </div>
+
+        {/* Scoreboard */}
+        <div className="col-span-2 md:col-span-1 md:col-start-2 md:row-start-1 flex justify-center px-0 md:px-4">
+          <div className="flex items-center justify-between w-full max-w-[320px] md:max-w-none md:w-auto md:justify-center gap-2 bg-white/5 rounded-full px-6 md:px-4 py-2 md:py-1.5 border border-white/10 shadow-lg">
+            <div className="flex flex-col items-end flex-1 md:flex-none">
+              <span className="text-[10px] text-text-muted uppercase tracking-wider max-w-[100px] sm:max-w-[120px] truncate text-right">
+                {room.host_nickname || "Host"}
+              </span>
+              <span className="text-sm font-bold text-accent-purple leading-tight">
+                {room.host_score || 0}
+              </span>
+            </div>
+            <div className="w-px h-8 md:h-6 bg-border-subtle mx-2 md:mx-1 shrink-0" />
+            <div className="flex flex-col items-start flex-1 md:flex-none">
+              <span className="text-[10px] text-text-muted uppercase tracking-wider max-w-[100px] sm:max-w-[120px] truncate text-left">
+                {room.guest_nickname || "Guest"}
+              </span>
+              <span className="text-sm font-bold text-accent-cyan leading-tight">
+                {room.guest_score || 0}
+              </span>
+            </div>
+          </div>
         </div>
       </header>
 
@@ -244,7 +250,12 @@ export default function GameRoom() {
           {!isGameOver ? (
             <div className="text-center mb-2 flex items-center justify-center gap-3">
               <span className="text-xs text-text-muted uppercase tracking-wider">
-                รอบที่ {Math.min(Math.ceil((room.current_turn || 1) / 2), room?.max_rounds || 5)} / {room?.max_rounds || 5}
+                รอบที่{" "}
+                {Math.min(
+                  Math.ceil((room.current_turn || 1) / 2),
+                  room?.max_rounds || 5,
+                )}{" "}
+                / {room?.max_rounds || 5}
               </span>
               {isPlaying && (
                 <span

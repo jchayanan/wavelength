@@ -11,20 +11,41 @@ export interface Identity {
 }
 
 const THAI_ADJECTIVES = [
-  "เก่ง", "น่ารัก", "เท่", "สุดเจ๋ง", "ลึกลับ", "ร่าเริง",
-  "ขยัน", "ฉลาด", "กล้าหาญ", "มีเสน่ห์", "สดใส", "ปัง",
+  "เก่ง",
+  "น่ารัก",
+  "เท่",
+  "สุดเจ๋ง",
+  "ลึกลับ",
+  "ร่าเริง",
+  "ขยัน",
+  "ฉลาด",
+  "กล้าหาญ",
+  "มีเสน่ห์",
+  "สดใส",
+  "ปัง",
 ];
 
 const THAI_NOUNS = [
-  "มังกร", "ยูนิคอร์น", "นินจา", "แมว", "หมาป่า", "นกฟีนิกซ์",
-  "สิงโต", "กระต่าย", "หมีขาว", "เหยี่ยว", "ปลาโลมา", "เสือ",
+  "มังกร",
+  "ยูนิคอร์น",
+  "นินจา",
+  "แมว",
+  "หมาป่า",
+  "นกฟีนิกซ์",
+  "สิงโต",
+  "กระต่าย",
+  "หมีขาว",
+  "เหยี่ยว",
+  "ปลาโลมา",
+  "เสือ",
 ];
 
 function generateNickname(): string {
-  const adj = THAI_ADJECTIVES[Math.floor(Math.random() * THAI_ADJECTIVES.length)];
+  const adj =
+    THAI_ADJECTIVES[Math.floor(Math.random() * THAI_ADJECTIVES.length)];
   const noun = THAI_NOUNS[Math.floor(Math.random() * THAI_NOUNS.length)];
   const num = Math.floor(Math.random() * 100);
-  return `${adj}${noun}${num}`;
+  return `${noun}${adj}${num}`;
 }
 
 function generateUserId(): string {
